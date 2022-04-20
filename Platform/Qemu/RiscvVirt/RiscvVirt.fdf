@@ -15,12 +15,46 @@
 # Build the variable store and the firmware code as one unified flash device
 # image.
 #
-[FD.RiscvVirt]
-BaseAddress   = $(FW_BASE_ADDRESS)
-Size          = $(FW_SIZE)
+# [FD.RiscvVirt]
+# BaseAddress   = $(FW_BASE_ADDRESS)
+#Size          = $(FW_SIZE)
+#ErasePolarity = 1
+#BlockSize     = $(BLOCK_SIZE)
+#NumBlocks     = $(FW_BLOCKS)
+
+#$(SECFV_OFFSET)|$(SECFV_SIZE)
+#gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVSecFvBase|gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVSecFvSize
+#FV = SECFV
+
+#$(PEIFV_OFFSET)|$(PEIFV_SIZE)
+#gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVPeiFvBase|gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVPeiFvSize
+#FV = PEIFV
+
+#$(FVMAIN_OFFSET)|$(FVMAIN_SIZE)
+#gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVDxeFvBase|gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVDxeFvSize
+#FV = FVMAIN_COMPACT
+
+#!include VarStore.fdf.inc
+
+#
+# Build the variable store and the firmware code as separate flash device
+# images.
+#
+[FD.RiscvVirt_VARS]
+BaseAddress   = $(VARS_BASE_ADDRESS)
+Size          = $(VARIABLES_SIZE)
 ErasePolarity = 1
 BlockSize     = $(BLOCK_SIZE)
-NumBlocks     = $(FW_BLOCKS)
+NumBlocks     = $(VARS_BLOCKS)
+
+!include VarStore.fdf.inc
+
+[FD.RiscvVirt_CODE]
+BaseAddress   = $(CODE_BASE_ADDRESS)
+Size          = $(CODE_SIZE)
+ErasePolarity = 1
+BlockSize     = $(BLOCK_SIZE)
+NumBlocks     = $(CODE_BLOCKS)
 
 $(SECFV_OFFSET)|$(SECFV_SIZE)
 gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVSecFvBase|gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVSecFvSize
@@ -33,8 +67,6 @@ FV = PEIFV
 $(FVMAIN_OFFSET)|$(FVMAIN_SIZE)
 gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVDxeFvBase|gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVDxeFvSize
 FV = FVMAIN_COMPACT
-
-!include VarStore.fdf.inc
 
 ################################################################################
 
@@ -129,7 +161,6 @@ READ_LOCK_STATUS   = TRUE
 APRIORI DXE {
   INF  MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
   INF  MdeModulePkg/Universal/PCD/Dxe/Pcd.inf
-  INF  Platform/SiFive/U5SeriesPkg/Universal/Dxe/RamFvbServicesRuntimeDxe/FvbServicesRuntimeDxe.inf
 }
 
 #
@@ -160,7 +191,7 @@ INF OvmfPkg/Virtio10Dxe/Virtio10.inf
 #
 # Video support
 #
-INF OvmfPkg/QemuRamfbDxe/QemuRamfbDxe.inf
+#INF OvmfPkg/QemuRamfbDxe/QemuRamfbDxe.inf
 INF OvmfPkg/VirtioGpuDxe/VirtioGpu.inf
 INF OvmfPkg/PlatformDxe/Platform.inf
 
@@ -182,7 +213,7 @@ INF  MdeModulePkg/Universal/Metronome/Metronome.inf
 INF  EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf
 
 # RISC-V Platform Drivers
-INF  Platform/SiFive/U5SeriesPkg/Universal/Dxe/RamFvbServicesRuntimeDxe/FvbServicesRuntimeDxe.inf
+INF  ArmPlatformPkg/Drivers/NorFlashDxe/NorFlashDxe.inf
 
 # RISC-V Core Drivers
 INF  Platform/SiFive/U5SeriesPkg/Universal/Dxe/TimerDxe/TimerDxe.inf
@@ -204,8 +235,13 @@ INF  MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
 INF  MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
 INF  MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
 INF  MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
-INF  MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
 INF  MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
+INF  MdeModulePkg/Universal/DisplayEngineDxe/DisplayEngineDxe.inf
+INF  MdeModulePkg/Universal/SetupBrowserDxe/SetupBrowserDxe.inf
+INF  MdeModulePkg/Universal/DriverHealthManagerDxe/DriverHealthManagerDxe.inf
+INF  MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
+INF  MdeModulePkg/Application/UiApp/UiApp.inf
+
 INF  MdeModulePkg/Universal/PrintDxe/PrintDxe.inf
 INF  MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
 INF  MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
@@ -213,8 +249,6 @@ INF  MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
 INF  MdeModulePkg/Bus/Scsi/ScsiBusDxe/ScsiBusDxe.inf
 INF  MdeModulePkg/Bus/Scsi/ScsiDiskDxe/ScsiDiskDxe.inf
 INF  MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
-INF  MdeModulePkg/Universal/SetupBrowserDxe/SetupBrowserDxe.inf
-INF  MdeModulePkg/Universal/DisplayEngineDxe/DisplayEngineDxe.inf
 INF  MdeModulePkg/Universal/MemoryTest/NullMemoryTestDxe/NullMemoryTestDxe.inf
 INF  FatPkg/EnhancedFatDxe/Fat.inf
 INF  MdeModulePkg/Universal/Disk/UdfDxe/UdfDxe.inf
@@ -225,7 +259,7 @@ INF MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
 !endif
 
 INF  MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
-INF  OvmfPkg/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+#INF  OvmfPkg/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
 
 INF  OvmfPkg/LinuxInitrdDynamicShellCommand/LinuxInitrdDynamicShellCommand.inf
 INF  ShellPkg/Application/Shell/Shell.inf
@@ -258,8 +292,6 @@ INF  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
-
-INF  MdeModulePkg/Application/UiApp/UiApp.inf
 
 ################################################################################
 

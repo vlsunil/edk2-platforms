@@ -20,7 +20,8 @@ DEFINE FW_BLOCKS         = 0x900
 DEFINE CODE_BASE_ADDRESS = $(FW_BASE_ADDRESS)
 DEFINE CODE_SIZE         = 0x00800000
 DEFINE CODE_BLOCKS       = 0x800
-DEFINE VARS_BLOCKS       = 0x20
+DEFINE VARS_BLOCKS       = 0xc0
+DEFINE VARIABLES_SIZE    = 0x00c0000
 
 #
 # SEC + opensbi library is the root FW domain.
@@ -47,12 +48,13 @@ DEFINE FVMAIN_SIZE                   = 0x00280000
 # The total size of EFI Variable FD must include
 # all of sub regions of EFI Variable
 #
-DEFINE VARS_OFFSET                   = 0x00800000
-DEFINE VARS_SIZE                     = 0x00007000
-DEFINE VARS_FTW_WORKING_OFFSET       = 0x00807000
-DEFINE VARS_FTW_WORKING_SIZE         = 0x00001000
-DEFINE VARS_FTW_SPARE_OFFSET         = 0x00808000
-DEFINE VARS_FTW_SPARE_SIZE           = 0x00018000
+DEFINE VARS_BASE_ADDRESS             = 0x22000000
+DEFINE VARS_OFFSET                   = 0x00000000
+DEFINE VARS_SIZE                     = 0x00040000
+DEFINE VARS_FTW_WORKING_OFFSET       = 0x00040000
+DEFINE VARS_FTW_WORKING_SIZE         = 0x00040000
+DEFINE VARS_FTW_SPARE_OFFSET         = 0x00080000
+DEFINE VARS_FTW_SPARE_SIZE           = 0x00040000
 
 #
 # Scratch area memory region
@@ -68,10 +70,10 @@ SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRootFirmwareDomainSize        = $(ROO
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdFirmwareDomainBaseAddress     = $(CODE_BASE_ADDRESS) + $(PEIFV_OFFSET)
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdFirmwareDomainSize            = $(FW_DOMAIN_SIZE)
 
-SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdVariableFdBaseAddress = $(FW_BASE_ADDRESS) + $(VARS_OFFSET)
+SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdVariableFdBaseAddress = $(VARS_BASE_ADDRESS)
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdVariableFdSize        = $(VARS_SIZE) + $(VARS_FTW_WORKING_SIZE) + $(VARS_FTW_SPARE_SIZE)
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdVariableFdBlockSize   = $(BLOCK_SIZE)
-SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdVariableFirmwareRegionBaseAddress = $(CODE_BASE_ADDRESS) + $(VARS_OFFSET)
+SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdVariableFirmwareRegionBaseAddress = $(VARS_BASE_ADDRESS)
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdVariableFirmwareRegionSize        = $(VARIABLE_FW_SIZE)
 
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdOpenSbiStackSize = 8192
