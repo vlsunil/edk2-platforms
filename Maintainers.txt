@@ -259,6 +259,11 @@ F: Platform/RISC-V/PlatformPkg/
 M: Sunil V L <sunilvl@ventanamicro.com>
 R: Daniel Schaefer <git@danielschaefer.me>
 
+QEMU RISC-V virt platform
+F: Platform/Qemu/RiscVVirt/
+M: Sunil V L <sunilvl@ventanamicro.com>
+R: Daniel Schaefer <git@danielschaefer.me>
+
 Platform/SiFive/U5Series
 F:Platform/SiFive/U5Series/
 M: Daniel Schaefer <git@danielschaefer.me>
