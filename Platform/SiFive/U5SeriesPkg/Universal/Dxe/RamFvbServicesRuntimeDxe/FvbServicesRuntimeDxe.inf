@@ -37,6 +37,7 @@
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   Platform/RISC-V/PlatformPkg/RiscVPlatformPkg.dec
+  Platform/SiFive/U5SeriesPkg/U5SeriesPkg.dec
 
 [LibraryClasses]
   BaseLib

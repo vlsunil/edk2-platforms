@@ -52,7 +52,7 @@
   RiscVCpuLib
   RiscVOpensbiLib
   RiscVOpensbiPlatformLib
-  RiscVEdk2SbiLib
+  RiscVSbiLib
 
 [FixedPcd]
   gUefiRiscVPlatformPkgTokenSpaceGuid.PcdRiscVPeiFvBase

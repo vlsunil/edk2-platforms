@@ -97,9 +97,6 @@ RiscVReadMachineImplementId (
   );
 
 VOID
-  RiscVSetSupervisorAddressTranslationRegister (UINT64);
-
-VOID
   RiscVSetSupervisorScratch (UINT64);
 
 UINT64
