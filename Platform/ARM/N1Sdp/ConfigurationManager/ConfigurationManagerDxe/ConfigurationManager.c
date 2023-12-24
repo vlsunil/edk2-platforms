@@ -2088,7 +2088,7 @@ N1sdpPlatformGetObject (
     case EObjNameSpaceStandard:
       Status = GetStandardNameSpaceObject (This, CmObjectId, Token, CmObject);
       break;
-    case EObjNameSpaceArm:
+    case EObjNameSpaceArch:
       Status = GetArmNameSpaceObject (This, CmObjectId, Token, CmObject);
       break;
     case EObjNameSpaceOem:
