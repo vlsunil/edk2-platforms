@@ -949,7 +949,7 @@ GetGTBlockTimerFrameInfo (
   @param [in]      This           Pointer to the Configuration Manager Protocol.
   @param [in]      CmObjectId     The Object ID of the CM object requested
   @param [in]      SearchToken    A unique token for identifying the requested
-                                  CM_ARM_GICC_INFO object.
+                                  CM_ARCH_GICC_INFO object.
   @param [in, out] CmObject       Pointer to the Configuration Manager Object
                                   descriptor describing the requested Object.
 
@@ -998,7 +998,7 @@ GetGicCInfo (
   @param [in]      This           Pointer to the Configuration Manager Protocol.
   @param [in]      CmObjectId     The Object ID of the CM object requested
   @param [in]      SearchToken    A unique token for identifying the requested
-                                  CM_ARM_LPI_INFO object.
+                                  CM_ARCH_LPI_INFO object.
   @param [in, out] CmObject       Pointer to the Configuration Manager Object
                                   descriptor describing the requested Object.
 
@@ -1048,7 +1048,7 @@ GetLpiInfo (
   @param [in]      This           Pointer to the Configuration Manager Protocol.
   @param [in]      CmObjectId     The Object ID of the CM object requested
   @param [in]      SearchToken    A unique token for identifying the requested
-                                  CM_ARM_PCI_ADDRESS_MAP_INFO object.
+                                  CM_ARCH_PCI_ADDRESS_MAP_INFO object.
   @param [in, out] CmObject       Pointer to the Configuration Manager Object
                                   descriptor describing the requested Object.
 
@@ -1097,7 +1097,7 @@ GetPciAddressMapInfo (
   @param [in]      This           Pointer to the Configuration Manager Protocol.
   @param [in]      CmObjectId     The Object ID of the CM object requested
   @param [in]      SearchToken    A unique token for identifying the requested
-                                  CM_ARM_PCI_INTERRUPT_MAP_INFO object.
+                                  CM_ARCH_PCI_INTERRUPT_MAP_INFO object.
   @param [in, out] CmObject       Pointer to the Configuration Manager Object
                                   descriptor describing the requested Object.
 
@@ -1147,7 +1147,7 @@ GetPciInterruptMapInfo (
   @param [in]      This           Pointer to the Configuration Manager Protocol.
   @param [in]      CmObjectId     The Object ID of the CM object requested
   @param [in]      SearchToken    A unique token for identifying the requested
-                                  CM_ARM_OBJ_REF list.
+                                  CM_ARCH_OBJ_REF list.
   @param [in, out] CmObject       Pointer to the Configuration Manager Object
                                   descriptor describing the requested Object.
 
@@ -1340,7 +1340,7 @@ GetArmNameSpaceObject (
   PlatformRepo = This->PlatRepoInfo;
 
   switch (GET_CM_OBJECT_ID (CmObjectId)) {
-    case EArmObjBootArchInfo:
+    case EArchObjBootArchInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->BootArchInfo,
@@ -1349,7 +1349,7 @@ GetArmNameSpaceObject (
                  CmObject
                  );
       break;
-    case EArmObjPowerManagementProfileInfo:
+    case EArchObjPowerManagementProfileInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->PmProfileInfo,
@@ -1359,7 +1359,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjGenericTimerInfo:
+    case EArchObjGenericTimerInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->GenericTimerInfo,
@@ -1369,7 +1369,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjPlatformGenericWatchdogInfo:
+    case EArchObjPlatformGenericWatchdogInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->Watchdog,
@@ -1379,7 +1379,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjPlatformGTBlockInfo:
+    case EArchObjPlatformGTBlockInfo:
       if (PlatformRepo->JunoRevision == JUNO_REVISION_R0) {
         // Disable Memory Mapped Platform Timers for Juno R0
         // due to Juno Erratum 832219.
@@ -1395,7 +1395,7 @@ GetArmNameSpaceObject (
       }
       break;
 
-    case EArmObjGTBlockTimerFrameInfo:
+    case EArchObjGTBlockTimerFrameInfo:
       if (PlatformRepo->JunoRevision == JUNO_REVISION_R0) {
         // Disable Memory Mapped Platform Timers for Juno R0
         // due to Juno Erratum 832219.
@@ -1414,7 +1414,7 @@ GetArmNameSpaceObject (
       }
       break;
 
-    case EArmObjGicCInfo:
+    case EArchObjGicCInfo:
       Status = HandleCmObjectRefByToken (
                  This,
                  CmObjectId,
@@ -1427,7 +1427,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjGicDInfo:
+    case EArchObjGicDInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->GicDInfo,
@@ -1436,7 +1436,7 @@ GetArmNameSpaceObject (
                  CmObject
                  );
       break;
-    case EArmObjSerialConsolePortInfo:
+    case EArchObjSerialConsolePortInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->SpcrSerialPort,
@@ -1446,7 +1446,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjSerialDebugPortInfo:
+    case EArchObjSerialDebugPortInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->DbgSerialPort,
@@ -1455,7 +1455,7 @@ GetArmNameSpaceObject (
                  CmObject
                  );
       break;
-    case EArmObjGicMsiFrameInfo:
+    case EArchObjGicMsiFrameInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->GicMsiFrameInfo,
@@ -1465,7 +1465,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjProcHierarchyInfo:
+    case EArchObjProcHierarchyInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  PlatformRepo->ProcHierarchyInfo,
@@ -1475,7 +1475,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjCacheInfo:
+    case EArchObjCacheInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  PlatformRepo->CacheInfo,
@@ -1485,7 +1485,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjCmRef:
+    case EArchObjCmRef:
       Status = HandleCmObjectSearchPlatformRepo (
                  This,
                  CmObjectId,
@@ -1495,7 +1495,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjPciConfigSpaceInfo:
+    case EArchObjPciConfigSpaceInfo:
       if (PlatformRepo->JunoRevision != JUNO_REVISION_R0) {
         Status = HandleCmObject (
                    CmObjectId,
@@ -1510,7 +1510,7 @@ GetArmNameSpaceObject (
       }
       break;
 
-    case EArmObjLpiInfo:
+    case EArchObjLpiInfo:
       Status = HandleCmObjectRefByToken (
                  This,
                  CmObjectId,
@@ -1523,7 +1523,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjPciAddressMapInfo:
+    case EArchObjPciAddressMapInfo:
       Status = HandleCmObjectRefByToken (
                  This,
                  CmObjectId,
@@ -1536,7 +1536,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjPciInterruptMapInfo:
+    case EArchObjPciInterruptMapInfo:
       Status = HandleCmObjectRefByToken (
                  This,
                  CmObjectId,
@@ -1647,7 +1647,7 @@ ArmJunoPlatformGetObject (
     case EObjNameSpaceStandard:
       Status = GetStandardNameSpaceObject (This, CmObjectId, Token, CmObject);
       break;
-    case EObjNameSpaceArm:
+    case EObjNameSpaceArch:
       Status = GetArmNameSpaceObject (This, CmObjectId, Token, CmObject);
       break;
     case EObjNameSpaceOem:
