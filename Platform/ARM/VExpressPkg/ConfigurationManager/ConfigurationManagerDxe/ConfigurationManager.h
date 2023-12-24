@@ -110,68 +110,68 @@ typedef struct PlatformRepositoryInfo {
   CM_STD_OBJ_ACPI_TABLE_INFO            CmAcpiTableList[PLAT_ACPI_TABLE_COUNT];
 
   /// Boot architecture information
-  CM_ARM_BOOT_ARCH_INFO                 BootArchInfo;
+  CM_ARCH_BOOT_ARCH_INFO                 BootArchInfo;
 
 #ifdef HEADLESS_PLATFORM
   /// Fixed feature flag information
-  CM_ARM_FIXED_FEATURE_FLAGS            FixedFeatureFlags;
+  CM_ARCH_FIXED_FEATURE_FLAGS            FixedFeatureFlags;
 #endif
 
   /// Power management profile information
-  CM_ARM_POWER_MANAGEMENT_PROFILE_INFO  PmProfileInfo;
+  CM_ARCH_POWER_MANAGEMENT_PROFILE_INFO  PmProfileInfo;
 
   /// GIC CPU interface information
-  CM_ARM_GICC_INFO                      GicCInfo[PLAT_CPU_COUNT];
+  CM_ARCH_GICC_INFO                      GicCInfo[PLAT_CPU_COUNT];
 
   /// GIC distributor information
-  CM_ARM_GICD_INFO                      GicDInfo;
+  CM_ARCH_GICD_INFO                      GicDInfo;
 
   /// GIC Redistributor information
-  CM_ARM_GIC_REDIST_INFO                GicRedistInfo;
+  CM_ARCH_GIC_REDIST_INFO                GicRedistInfo;
 
   /// Generic timer information
-  CM_ARM_GENERIC_TIMER_INFO             GenericTimerInfo;
+  CM_ARCH_GENERIC_TIMER_INFO             GenericTimerInfo;
 
   /// Generic timer block information
-  CM_ARM_GTBLOCK_INFO                   GTBlockInfo[PLAT_GTBLOCK_COUNT];
+  CM_ARCH_GTBLOCK_INFO                   GTBlockInfo[PLAT_GTBLOCK_COUNT];
 
   /// Generic timer frame information
-  CM_ARM_GTBLOCK_TIMER_FRAME_INFO       GTBlock0TimerInfo[PLAT_GTFRAME_COUNT];
+  CM_ARCH_GTBLOCK_TIMER_FRAME_INFO       GTBlock0TimerInfo[PLAT_GTFRAME_COUNT];
 
   /// Watchdog information
-  CM_ARM_GENERIC_WATCHDOG_INFO          Watchdog;
+  CM_ARCH_GENERIC_WATCHDOG_INFO          Watchdog;
 
   /** Serial port information for the
       serial port console redirection port
   */
-  CM_ARM_SERIAL_PORT_INFO               SpcrSerialPort;
+  CM_ARCH_SERIAL_PORT_INFO               SpcrSerialPort;
 
   /// Serial port information for the DBG2 UART port
-  CM_ARM_SERIAL_PORT_INFO               DbgSerialPort;
+  CM_ARCH_SERIAL_PORT_INFO               DbgSerialPort;
 
   /// GIC ITS information
-  CM_ARM_GIC_ITS_INFO                   GicItsInfo;
+  CM_ARCH_GIC_ITS_INFO                   GicItsInfo;
 
   // FVP RevC components
   /// SMMUv3 node
-  CM_ARM_SMMUV3_NODE                    SmmuV3Info;
+  CM_ARCH_SMMUV3_NODE                    SmmuV3Info;
 
   /// ITS Group node
-  CM_ARM_ITS_GROUP_NODE                 ItsGroupInfo;
+  CM_ARCH_ITS_GROUP_NODE                 ItsGroupInfo;
 
   /// ITS Identifier array
-  CM_ARM_ITS_IDENTIFIER                 ItsIdentifierArray[1];
+  CM_ARCH_ITS_IDENTIFIER                 ItsIdentifierArray[1];
 
   /// PCI Root complex node
-  CM_ARM_ROOT_COMPLEX_NODE              RootComplexInfo;
+  CM_ARCH_ROOT_COMPLEX_NODE              RootComplexInfo;
 
   /// Array of DeviceID mapping
-  CM_ARM_ID_MAPPING                     DeviceIdMapping[2];
+  CM_ARCH_ID_MAPPING                     DeviceIdMapping[2];
 
   /// PCI configuration space information
-  CM_ARM_PCI_CONFIG_SPACE_INFO          PciConfigInfo;
+  CM_ARCH_PCI_CONFIG_SPACE_INFO          PciConfigInfo;
 
-  CM_ARM_ET_INFO                        EtInfo;
+  CM_ARCH_ET_INFO                        EtInfo;
 
   /// System ID
   UINT32                                SysId;

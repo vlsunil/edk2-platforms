@@ -644,7 +644,7 @@ GetDeviceIdMappingArray (
   }
 
   CmObject->ObjectId = CmObjectId;
-  CmObject->Size = sizeof (CM_ARM_ID_MAPPING);
+  CmObject->Size = sizeof (CM_ARCH_ID_MAPPING);
   CmObject->Data = (VOID*)Token;
   CmObject->Count = 1;
   return EFI_SUCCESS;
@@ -788,7 +788,7 @@ GetArmNameSpaceObject (
   }
 
   switch (GET_CM_OBJECT_ID (CmObjectId)) {
-    case EArmObjBootArchInfo:
+    case EArchObjBootArchInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->BootArchInfo,
@@ -799,7 +799,7 @@ GetArmNameSpaceObject (
       break;
 
 #ifdef HEADLESS_PLATFORM
-    case EArmObjFixedFeatureFlags:
+    case EArchObjFixedFeatureFlags:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->FixedFeatureFlags,
@@ -809,7 +809,7 @@ GetArmNameSpaceObject (
                  );
       break;
 #endif
-    case EArmObjPowerManagementProfileInfo:
+    case EArchObjPowerManagementProfileInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->PmProfileInfo,
@@ -819,7 +819,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjGenericTimerInfo:
+    case EArchObjGenericTimerInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->GenericTimerInfo,
@@ -829,7 +829,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjPlatformGenericWatchdogInfo:
+    case EArchObjPlatformGenericWatchdogInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->Watchdog,
@@ -839,7 +839,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjPlatformGTBlockInfo:
+    case EArchObjPlatformGTBlockInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  PlatformRepo->GTBlockInfo,
@@ -849,7 +849,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjGTBlockTimerFrameInfo:
+    case EArchObjGTBlockTimerFrameInfo:
       Status = HandleCmObjectRefByToken (
                  This,
                  CmObjectId,
@@ -862,7 +862,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjGicCInfo:
+    case EArchObjGicCInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  PlatformRepo->GicCInfo,
@@ -872,7 +872,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjGicDInfo:
+    case EArchObjGicDInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->GicDInfo,
@@ -882,7 +882,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjGicRedistributorInfo:
+    case EArchObjGicRedistributorInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->GicRedistInfo,
@@ -892,7 +892,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjSerialConsolePortInfo:
+    case EArchObjSerialConsolePortInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->SpcrSerialPort,
@@ -902,7 +902,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjSerialDebugPortInfo:
+    case EArchObjSerialDebugPortInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->DbgSerialPort,
@@ -912,7 +912,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjGicItsInfo:
+    case EArchObjGicItsInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->GicItsInfo,
@@ -922,7 +922,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjSmmuV3:
+    case EArchObjSmmuV3:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->SmmuV3Info,
@@ -932,7 +932,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjItsGroup:
+    case EArchObjItsGroup:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->ItsGroupInfo,
@@ -942,7 +942,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjGicItsIdentifierArray:
+    case EArchObjGicItsIdentifierArray:
       Status = HandleCmObjectRefByToken (
                  This,
                  CmObjectId,
@@ -955,7 +955,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjRootComplex:
+    case EArchObjRootComplex:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->RootComplexInfo,
@@ -965,7 +965,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjIdMappingArray:
+    case EArchObjIdMappingArray:
       Status = HandleCmObjectRefByToken (
                  This,
                  CmObjectId,
@@ -978,7 +978,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjPciConfigSpaceInfo:
+    case EArchObjPciConfigSpaceInfo:
       Status = HandleCmObject (
                  CmObjectId,
                  &PlatformRepo->PciConfigInfo,
@@ -988,7 +988,7 @@ GetArmNameSpaceObject (
                  );
       break;
 
-    case EArmObjEtInfo:
+    case EArchObjEtInfo:
       if (Token == (CM_OBJECT_TOKEN)&PlatformRepo->EtInfo) {
         Status = HandleCmObject (
                   CmObjectId,
@@ -1101,7 +1101,7 @@ ArmVExpressPlatformGetObject (
     case EObjNameSpaceStandard:
       Status = GetStandardNameSpaceObject (This, CmObjectId, Token, CmObject);
       break;
-    case EObjNameSpaceArm:
+    case EObjNameSpaceArch:
       Status = GetArmNameSpaceObject (This, CmObjectId, Token, CmObject);
       break;
     case EObjNameSpaceOem:
